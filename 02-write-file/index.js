@@ -10,7 +10,7 @@ fs.writeFile(filePath, '', () => {
 
 const writeData = (data) => {
   fs.appendFile(filePath, `${data}\n`, () => {
-    console.log(`Записал. Пожалуйста продолжай!`);
+    console.log('Записал. Пожалуйста продолжай!');
   });
 };
 
