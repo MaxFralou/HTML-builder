@@ -6,7 +6,7 @@ const { promises: fsPromises } = fs;
 const copyDirPath = path.join(__dirname, 'files-copy');
 const readDirPath = path.join(__dirname, 'files');
 
-async function copyDirectory(src, dest) {
+async function copyDir(src, dest) {
   await fsPromises.mkdir(dest, { recursive: true });
 
   const files = await fsPromises.readdir(src, { withFileTypes: true });
@@ -15,14 +15,14 @@ async function copyDirectory(src, dest) {
     const destPath = path.join(dest, file.name);
 
     if (file.isDirectory()) {
-      await copyDirectory(srcPath, destPath);
+      await copyDir(srcPath, destPath);
     } else {
       await fsPromises.copyFile(srcPath, destPath);
     }
   });
 }
 
-copyDirectory(readDirPath, copyDirPath)
+copyDir(readDirPath, copyDirPath)
   .then(() => {
     console.log('Копирование папки завершено успешно. Поздравляю!');
   })
